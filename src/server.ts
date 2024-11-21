@@ -26,7 +26,7 @@ import * as GraphQLUnion from "./api/schema/union";
 import * as GraphQLInterface from "./api/schema/Interface/interface";
 import * as GraphQLInput from "./api/schema/Input/index";
 import * as GraphQLEnum from "./api/schema/Enum/index";
-import * as GraphQLPagination from './api/schema/pagination/index';
+import * as GraphQLPagination from "./api/schema/pagination/index";
 
 import { graphqlUploadExpress } from "graphql-upload-ts";
 
@@ -105,6 +105,6 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
   );
   await new Promise(() => {
     httpServer.listen({ port: process.env.PORT || 4000 });
-    console.log(`Server is running at http://localhost:4000/graphql 🚀 💻 `);
+    console.log(`Server is running at ${process.env.PORT}🚀 💻 `);
   });
 })();
