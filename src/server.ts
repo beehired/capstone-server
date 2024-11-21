@@ -100,6 +100,7 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
         "https://studio.apollographql.com",
         "http://localhost:3000",
         "https://previewbeehired-beehireds-projects.vercel.app",
+        "https://www.beehireds.com",
       ],
     }),
     json(),
