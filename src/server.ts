@@ -96,7 +96,11 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
     "/graphql",
     cors<cors.CorsRequest>({
       credentials: true,
-      origin: ["https://studio.apollographql.com", "http://localhost:3000"],
+      origin: [
+        "https://studio.apollographql.com",
+        "http://localhost:3000",
+        "https://capstone-client-3cekbix7u-beehireds-projects.vercel.app/auth/login",
+      ],
     }),
     json(),
     expressMiddleware(server, {
