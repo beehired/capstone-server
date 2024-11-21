@@ -99,7 +99,7 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
       origin: [
         "https://studio.apollographql.com",
         "http://localhost:3000",
-        "https://previewbeehired-beehireds-projects.vercel.app/",
+        "https://previewbeehired-beehireds-projects.vercel.app",
       ],
     }),
     json(),
