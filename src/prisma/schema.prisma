@@ -1,0 +1,444 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  userID           String             @id @default(cuid())
+  email            String             @unique @db.VarChar(300)
+  plan             String?            @db.VarChar(100)
+  password         String             @db.VarChar(300)
+  role             Role
+  verified         Boolean            @default(false)
+  isArchive        Boolean            @default(false)
+  createdAt        DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime           @default(now()) @updatedAt @db.Timestamp(6)
+  Activity         ActivityLogs[]
+  Application      Application[]
+  Company          Company?
+  Favourite        Favourite[]
+  Font             Font[]
+  receivedMessages Message[]          @relation("ReceivedMessage")
+  sentMessages     Message[]          @relation("SentMessage")
+  MessageStatus    MessageStatus[]
+  Notification     Notification[]
+  PassHistory      PasswordHash[]
+  Profile          Profile?
+  Organizer        ProjectOrganizer[]
+  report           Report[]
+  Requirement      Requirements[]
+  ResetPassword    ResetPassword[]
+  Review           Review[]
+  scheduleReceiver Schedule[]         @relation("ScheduleReceiver")
+  scheduleSender   Schedule[]         @relation("ScheduleSender")
+  Subscription     Subscription?
+  Theme            Theme[]
+  Zoom             zintegration?
+}
+
+model zintegration {
+  integrationID String  @id @default(cuid())
+  accountID     String
+  clientID      String
+  secretID      String
+  userID        String? @unique
+  User          User?   @relation(fields: [userID], references: [userID])
+}
+
+model Subscription {
+  subscriptionID String  @id @default(cuid())
+  subscriptionId String
+  userID         String? @unique
+  User           User?   @relation(fields: [userID], references: [userID])
+}
+
+model Requirements {
+  requirementsID String   @id @default(cuid())
+  requirement    String
+  type           String   @db.VarChar(300)
+  createdAt      DateTime @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  userID         String?
+  companyID      String?
+  Company        Company? @relation(fields: [companyID], references: [companyID])
+  User           User?    @relation(fields: [userID], references: [userID])
+}
+
+model Notification {
+  notificationID   String             @id @default(cuid())
+  read             Boolean            @default(false)
+  createdAt        DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime           @default(now()) @updatedAt @db.Timestamp(6)
+  userID           String?
+  is_deleted       Boolean            @default(false)
+  title            String             @db.VarChar(300)
+  User             User?              @relation(fields: [userID], references: [userID], onDelete: Cascade)
+  Application      Application[]      @relation("ApplicationToNotification")
+  Company          Company[]          @relation("CompanyToNotification")
+  ProjectOrganizer ProjectOrganizer[] @relation("NotificationToProjectOrganizer")
+  Schedule         Schedule[]         @relation("NotificationToSchedule")
+}
+
+model Message {
+  messageID     String          @id @default(cuid())
+  message       String?
+  senderID      String
+  receiverID    String
+  createdAt     DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime        @default(now()) @updatedAt @db.Timestamp(6)
+  receiver      User            @relation("ReceivedMessage", fields: [receiverID], references: [userID], onDelete: Cascade)
+  sender        User            @relation("SentMessage", fields: [senderID], references: [userID], onDelete: Cascade)
+  MessageStatus MessageStatus[]
+  Media         Media[]         @relation("MediaToMessage")
+}
+
+model MessageStatus {
+  isRead          Boolean  @default(false)
+  messageID       String?
+  userID          String?
+  createdAt       DateTime @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  messageStatusID String   @id @default(cuid())
+  Message         Message? @relation(fields: [messageID], references: [messageID])
+  User            User?    @relation(fields: [userID], references: [userID])
+}
+
+model Company {
+  companyID    String             @id @default(cuid())
+  companyName  String             @db.VarChar(300)
+  slug         String             @db.VarChar(300)
+  description  String             @db.VarChar(1000)
+  location     String             @db.VarChar(300)
+  companySize  String             @db.VarChar(300)
+  verified     Boolean            @default(false)
+  createdAt    DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime           @default(now()) @updatedAt @db.Timestamp(6)
+  userID       String?            @unique
+  User         User?              @relation(fields: [userID], references: [userID], onDelete: Cascade)
+  JobPost      JobPost[]
+  media        Media?
+  Organizer    ProjectOrganizer[]
+  Requirements Requirements[]
+  review       Review[]
+  Notification Notification[]     @relation("CompanyToNotification")
+}
+
+model Profile {
+  profileID  String      @id @default(cuid())
+  firstname  String      @db.VarChar(256)
+  lastname   String      @db.VarChar(256)
+  phone      String?
+  birthday   DateTime?   @default(now()) @db.Date
+  createdAt  DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime    @default(now()) @updatedAt @db.Timestamp(6)
+  userID     String?     @unique
+  avatarID   String?     @unique
+  fontFontID String?
+  headerID   String?     @unique
+  About      About?
+  Education  Education[]
+  Portfolio  Portfolio[]
+  Avatar     Media?      @relation("Avatar", fields: [avatarID], references: [mediaID])
+  Font       Font?       @relation(fields: [fontFontID], references: [fontID])
+  Header     Media?      @relation("Header", fields: [headerID], references: [mediaID])
+  User       User?       @relation(fields: [userID], references: [userID], onDelete: Cascade)
+  Resume     Resume[]
+  Social     Social?
+  Skills     Skills[]    @relation("ProfileToSkills")
+  theme      Theme[]     @relation("ProfileToTheme")
+}
+
+model Social {
+  socialID  String   @id @default(cuid())
+  instagram String?
+  facebook  String?
+  Github    String?
+  X         String?
+  Web       String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  profileID String?  @unique
+  Profile   Profile? @relation(fields: [profileID], references: [profileID])
+}
+
+model ResetPassword {
+  resetPassID String   @id @default(cuid())
+  reset       String   @db.VarChar(200)
+  expiredAt   DateTime @db.Timestamp(6)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  userID      String?
+  User        User?    @relation(fields: [userID], references: [userID])
+}
+
+model About {
+  aboutID   String   @id @default(cuid())
+  bio       String?  @db.VarChar(1000)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  profileID String?  @unique
+  Profile   Profile? @relation(fields: [profileID], references: [profileID], onDelete: Cascade)
+  Skills    Skills[]
+}
+
+model Skills {
+  skillsID  String      @id @default(cuid())
+  skills    String      @unique @db.VarChar(100)
+  createdAt DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @updatedAt @db.Timestamp(6)
+  aboutID   String?
+  profileID String?
+  About     About?      @relation(fields: [aboutID], references: [aboutID], onDelete: Cascade)
+  Education Education[] @relation("EducationToSkills")
+  JobPost   JobPost[]   @relation("JobPostToSkills")
+  Portfolio Portfolio[] @relation("PortfolioToSkills")
+  Profile   Profile[]   @relation("ProfileToSkills")
+}
+
+model Media {
+  mediaID     String     @id @default(cuid())
+  media       String
+  createdAt   DateTime   @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime   @default(now()) @updatedAt @db.Timestamp(6)
+  portfolioID String?
+  companyID   String?    @unique
+  Company     Company?   @relation(fields: [companyID], references: [companyID])
+  Portfolio   Portfolio? @relation(fields: [portfolioID], references: [portfolioID], onDelete: Cascade)
+  Avatar      Profile?   @relation("Avatar")
+  Header      Profile?   @relation("Header")
+  Message     Message[]  @relation("MediaToMessage")
+}
+
+model Portfolio {
+  portfolioID    String   @id @default(cuid())
+  title          String   @db.VarChar(300)
+  description    String   @db.VarChar(1000)
+  employmentType String   @db.VarChar(300)
+  companyName    String   @db.VarChar(300)
+  location       String   @db.VarChar(300)
+  locationType   String   @db.VarChar(300)
+  createdAt      DateTime @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  profileID      String?
+  endMonth       String?  @db.VarChar(100)
+  endYear        String?  @db.VarChar(100)
+  startMonth     String   @db.VarChar(100)
+  startYear      String   @db.VarChar(100)
+  Media          Media[]
+  Profile        Profile? @relation(fields: [profileID], references: [profileID], onDelete: Cascade)
+  Skills         Skills[] @relation("PortfolioToSkills")
+}
+
+model Theme {
+  themeID   String    @id @default(cuid())
+  theme     String
+  image     String
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @updatedAt @db.Timestamp(6)
+  userID    String?
+  User      User?     @relation(fields: [userID], references: [userID])
+  Profile   Profile[] @relation("ProfileToTheme")
+}
+
+model Font {
+  fontID    String    @id @default(cuid())
+  font      String
+  image     String
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @updatedAt @db.Timestamp(6)
+  userID    String?
+  User      User?     @relation(fields: [userID], references: [userID])
+  Profile   Profile[]
+}
+
+model Education {
+  educationID String   @id @default(cuid())
+  school      String   @db.VarChar(500)
+  degree      String   @db.VarChar(200)
+  study       String   @db.VarChar(300)
+  startMonth  String   @db.VarChar(100)
+  startYear   String   @db.VarChar(100)
+  endMonth    String?  @db.VarChar(100)
+  endYear     String?  @db.VarChar(100)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  profileID   String?
+  Profile     Profile? @relation(fields: [profileID], references: [profileID])
+  Skills      Skills[] @relation("EducationToSkills")
+}
+
+model Resume {
+  resumeID    String        @id @default(cuid())
+  resume      String
+  createdAt   DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime      @default(now()) @updatedAt @db.Timestamp(6)
+  profileID   String?
+  title       String
+  Profile     Profile?      @relation(fields: [profileID], references: [profileID], onDelete: Cascade)
+  Application Application[] @relation("ApplicationToResume")
+}
+
+model PasswordHash {
+  passowrdID String   @id @default(cuid())
+  passHash   String
+  createdAt  DateTime @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  userID     String?
+  User       User?    @relation(fields: [userID], references: [userID], onDelete: Cascade)
+}
+
+model JobPost {
+  jobPostID   String        @id @default(cuid())
+  title       String        @db.VarChar(300)
+  slug        String
+  description String
+  location    String        @db.VarChar(100)
+  duration    String        @db.VarChar(300)
+  JobType     String[]
+  endDate     DateTime      @db.Date
+  experience  String        @db.VarChar(100)
+  isArchive   Boolean       @default(false)
+  isOpen      String        @db.VarChar(200)
+  createdAt   DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime      @default(now()) @updatedAt @db.Timestamp(6)
+  companyID   String?
+  featured    Boolean       @default(false)
+  status      String        @db.VarChar(200)
+  agreement   String
+  Application Application[]
+  Favourite   Favourite[]
+  Company     Company?      @relation(fields: [companyID], references: [companyID], onDelete: Cascade)
+  Report      Report[]
+  Salary      Salary?
+  Skills      Skills[]      @relation("JobPostToSkills")
+}
+
+model Salary {
+  salaryID  String   @id @default(cuid())
+  fixed     Int?
+  min       Float?
+  max       Float?
+  currency  String   @db.VarChar(3)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  jobPostID String?  @unique
+  JobPost   JobPost? @relation(fields: [jobPostID], references: [jobPostID])
+}
+
+model Favourite {
+  favouriteID String   @id @default(cuid())
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  userID      String?
+  jobpostID   String?
+  JobPost     JobPost? @relation(fields: [jobpostID], references: [jobPostID])
+  User        User?    @relation(fields: [userID], references: [userID])
+}
+
+model Report {
+  reportID  String   @id @default(cuid())
+  message   String
+  userID    String?
+  jobpostID String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  JobPost   JobPost? @relation(fields: [jobpostID], references: [jobPostID])
+  User      User?    @relation(fields: [userID], references: [userID])
+}
+
+model Application {
+  applicationID String            @id @default(cuid())
+  id            String            @db.VarChar(20)
+  status        String            @db.VarChar(200)
+  createdAt     DateTime          @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime          @default(now()) @updatedAt @db.Timestamp(6)
+  jobPostID     String?
+  userID        String?
+  JobPost       JobPost?          @relation(fields: [jobPostID], references: [jobPostID])
+  User          User?             @relation(fields: [userID], references: [userID], onDelete: Cascade)
+  ATS           ApplicationScore?
+  Notification  Notification[]    @relation("ApplicationToNotification")
+  Resume        Resume[]          @relation("ApplicationToResume")
+}
+
+model ActivityLogs {
+  logsID      String   @id @default(cuid())
+  title       String   @db.VarChar(200)
+  description String   @db.VarChar(200)
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  userID      String?
+  User        User?    @relation(fields: [userID], references: [userID], onDelete: Cascade)
+}
+
+model ApplicationScore {
+  applicationScoreID String       @id @default(cuid())
+  score              Decimal      @db.Decimal(10, 2)
+  createdAt          DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt          DateTime     @default(now()) @updatedAt @db.Timestamp(6)
+  applicationID      String?      @unique
+  Application        Application? @relation(fields: [applicationID], references: [applicationID], onDelete: Cascade)
+}
+
+model Schedule {
+  scheduleID   String         @id @default(cuid())
+  title        String         @db.VarChar(300)
+  description  String?        @db.VarChar(1000)
+  startDate    DateTime       @db.Date
+  endDate      DateTime       @db.Date
+  link         String
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime       @default(now()) @updatedAt @db.Timestamp(6)
+  senderID     String
+  receiverID   String
+  endTime      String         @db.VarChar(50)
+  startTime    String         @db.VarChar(50)
+  receiver     User           @relation("ScheduleReceiver", fields: [receiverID], references: [userID], onDelete: Cascade)
+  sender       User           @relation("ScheduleSender", fields: [senderID], references: [userID], onDelete: Cascade)
+  Notification Notification[] @relation("NotificationToSchedule")
+}
+
+model Review {
+  reviewID  String   @id @default(cuid())
+  review    String
+  rating    Float
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  userID    String?
+  companyID String?
+  Company   Company? @relation(fields: [companyID], references: [companyID], onDelete: Cascade)
+  User      User?    @relation(fields: [userID], references: [userID], onDelete: Cascade)
+}
+
+model ProjectOrganizer {
+  projectOrganizerID String         @id @default(cuid())
+  status             String         @db.VarChar(100)
+  amount             Float
+  startDate          DateTime       @db.Date
+  endDate            DateTime       @db.Date
+  createdAt          DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt          DateTime       @default(now()) @updatedAt @db.Timestamp(6)
+  userID             String?
+  companyID          String?
+  title              String         @db.VarChar(300)
+  description        String
+  Company            Company?       @relation(fields: [companyID], references: [companyID])
+  User               User?          @relation(fields: [userID], references: [userID])
+  Notification       Notification[] @relation("NotificationToProjectOrganizer")
+}
+
+enum Role {
+  admin
+  recruiter
+  freelance
+}
+
+enum paymentType {
+  ewallet
+  card
+}
