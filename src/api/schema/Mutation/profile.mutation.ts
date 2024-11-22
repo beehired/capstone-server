@@ -162,11 +162,12 @@ export const ProfileMutation = extendType({
         const skill = await prisma.profile.update({
           data: {
             Skills: {
-              connect: skills.map((skilled) => {
-                return {
+              connectOrCreate: skills.map((skilled) => ({
+                create: {
                   skills: skilled,
-                };
-              }),
+                },
+                where: { skills: skilled },
+              })),
             },
           },
           where: { profileID },
