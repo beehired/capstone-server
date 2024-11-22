@@ -13,6 +13,7 @@
     "@apollo/server": "^4.11.0",
     "@apollo/utils.keyvaluecache": "^3.1.0",
     "@prisma/client": "^5.21.1",
+    "@prisma/extension-accelerate": "^1.2.1",
     "@sendgrid/mail": "^8.1.4",
     "@types/bcrypt": "^5.0.2",
     "axios": "^1.7.7",
