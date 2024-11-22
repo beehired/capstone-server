@@ -26,7 +26,7 @@ import * as GraphQLUnion from "./api/schema/union";
 import * as GraphQLInterface from "./api/schema/Interface/interface";
 import * as GraphQLInput from "./api/schema/Input/index";
 import * as GraphQLEnum from "./api/schema/Enum/index";
-import * as GraphQLPagination from './api/schema/pagination/index';
+import * as GraphQLPagination from "./api/schema/pagination/index";
 
 import { graphqlUploadExpress } from "graphql-upload-ts";
 
@@ -96,7 +96,12 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
     "/graphql",
     cors<cors.CorsRequest>({
       credentials: true,
-      origin: ["https://studio.apollographql.com", "http://localhost:3000"],
+      origin: [
+        "https://studio.apollographql.com",
+        "http://localhost:3000",
+        "http://beehireds.com",
+        "https://previewbeehired-beehireds-projects.vercel.app/",
+      ],
     }),
     json(),
     expressMiddleware(server, {
