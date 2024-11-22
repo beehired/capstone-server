@@ -125,7 +125,7 @@ export const UserMutation = extendType({
                 companyName: input.companyName,
                 slug: Slugify(input.companyName),
                 companySize: input.companySize,
-                description: input.location,
+                description: input.description,
                 location: input.location,
                 media: {
                   create: {
@@ -195,7 +195,7 @@ export const UserMutation = extendType({
               return {
                 __typename: "ErrorObject",
                 code: 400,
-                message: `${key}is required`,
+                message: `${key} is required`,
               };
             }
           }
@@ -224,9 +224,14 @@ export const UserMutation = extendType({
                 firstname: input.firstname,
                 lastname: input.lastname,
                 Skills: {
-                  connect: skills.map((skilled) => {
-                    return { skills: skilled };
-                  }),
+                  connectOrCreate: skills.map((skilled) => ({
+                    create: {
+                      skills: skilled,
+                    },
+                    where: {
+                      skills: skilled,
+                    },
+                  })),
                 },
               },
             },

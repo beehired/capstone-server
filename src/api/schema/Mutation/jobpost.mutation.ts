@@ -126,9 +126,12 @@ export const JobPostMutation = extendType({
                   },
                 },
                 Skills: {
-                  connect: skills.map((skill) => {
-                    return { skills: skill };
-                  }) as any,
+                  connectOrCreate: skills.map((skilled) => ({
+                    create: {
+                      skills: skilled,
+                    },
+                    where: { skills: skilled },
+                  })),
                 },
               },
             });
@@ -168,9 +171,12 @@ export const JobPostMutation = extendType({
                   },
                 },
                 Skills: {
-                  connect: skills.map((skill) => {
-                    return { skills: skill };
-                  }) as any,
+                  connectOrCreate: skills.map((skilled) => ({
+                    create: {
+                      skills: skilled,
+                    },
+                    where: { skills: skilled },
+                  })),
                 },
               },
             });
@@ -211,9 +217,12 @@ export const JobPostMutation = extendType({
                   },
                 },
                 Skills: {
-                  connect: skills.map((skill) => {
-                    return { skills: skill };
-                  }) as any,
+                  connectOrCreate: skills.map((skilled) => ({
+                    create: {
+                      skills: skilled,
+                    },
+                    where: { skills: skilled },
+                  })),
                 },
               },
             });
@@ -253,9 +262,12 @@ export const JobPostMutation = extendType({
                   },
                 },
                 Skills: {
-                  connect: skills.map((skill) => {
-                    return { skills: skill };
-                  }) as any,
+                  connectOrCreate: skills.map((skilled) => ({
+                    create: {
+                      skills: skilled,
+                    },
+                    where: { skills: skilled },
+                  })),
                 },
               },
             });
@@ -360,9 +372,12 @@ export const JobPostMutation = extendType({
                 },
               },
               Skills: {
-                connect: skills.map((skilled) => {
-                  return { skills: skilled };
-                }),
+                connectOrCreate: skills.map((skilled) => ({
+                  create: {
+                    skills: skilled,
+                  },
+                  where: { skills: skilled },
+                })),
               },
             },
             where: {

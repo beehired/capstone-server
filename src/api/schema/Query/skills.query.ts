@@ -16,7 +16,7 @@ export const SkillQuery = extendType({
             },
           },
           orderBy: {
-            createdAt: "desc",
+            skills: "asc",
           },
         });
 
