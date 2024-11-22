@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "postinstall": "npx prisma generate --schema=./src/prisma/schema.prisma",
+    "start": "tsx src/server.ts"
   },
-  "keywords": [],
+  "keywords": [ ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -38,6 +40,7 @@
     "prisma": "^5.21.1",
     "slugify": "^1.6.6",
     "tslib": "^2.8.0",
+    "tsx": "^4.19.2",
     "ws": "^8.18.0"
   },
   "devDependencies": {

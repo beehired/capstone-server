@@ -99,8 +99,8 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
       origin: [
         "https://studio.apollographql.com",
         "http://localhost:3000",
+        "https://previewbeehired-beehireds-projects.vercel.app",
         "https://www.beehireds.com",
-        "https://previewbeehired-beehireds-projects.vercel.app/",
       ],
     }),
     json(),
@@ -110,6 +110,6 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
   );
   await new Promise(() => {
     httpServer.listen({ port: process.env.PORT || 4000 });
-    console.log(`Server is running at http://localhost:4000/graphql 🚀 💻 `);
+    console.log(`Server is running at ${process.env.PORT}🚀 💻 `);
   });
 })();
