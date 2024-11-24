@@ -44,7 +44,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 409,
-            message: "Email Address is already existing",
+            message: "Email Address is already exists",
           };
         }
 
@@ -109,7 +109,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 409,
-            message: "Email Address is already existing",
+            message: "Email Address is already exists",
           };
         }
 
@@ -209,7 +209,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already exist",
+            message: "Email Address is already exists",
           };
         }
 
@@ -448,7 +448,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already existing.",
+            message: "Email Address is already exists",
           };
         }
 
@@ -456,7 +456,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already existing.",
+            message: "Email Address is already exists",
           };
         }
 
