@@ -136,7 +136,7 @@ export interface NexusGenInputs {
     firstname?: string | null; // String
     lastname?: string | null; // String
     password?: string | null; // String
-    phone?: NexusGenScalars['PhoneNumber'] | null; // PhoneNumber
+    phone?: string | null; // String
   }
   UserRecruiterInput: { // input type
     companyName?: string | null; // String
@@ -609,6 +609,7 @@ export interface NexusGenUnions {
   JobPostPayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['jobpost'];
   MediaPayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['media'];
   PortfolioPayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['portfolio'];
+  ProfilePayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['profile'];
   ResumePayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['resume'];
   SchedulePayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['schedule'];
   SkillPayload: NexusGenRootTypes['ErrorObject'] | NexusGenRootTypes['skills'];
@@ -780,7 +781,7 @@ export interface NexusGenFieldTypes {
     updateSocialLink: NexusGenRootTypes['social'] | null; // social
     updateTheme: NexusGenRootTypes['theme'] | null; // theme
     updateUserPasswordAccount: NexusGenRootTypes['UserPayload'] | null; // UserPayload
-    updateUserProfile: NexusGenRootTypes['user'] | null; // user
+    updateUserProfile: NexusGenRootTypes['ProfilePayload'] | null; // ProfilePayload
     updateZoomIntegration: NexusGenRootTypes['zintegration'] | null; // zintegration
     upgradeSubscription: NexusGenRootTypes['user'] | null; // user
     verifyMyAccount: NexusGenRootTypes['user'] | null; // user
@@ -1391,7 +1392,7 @@ export interface NexusGenFieldTypeNames {
     updateSocialLink: 'social'
     updateTheme: 'theme'
     updateUserPasswordAccount: 'UserPayload'
-    updateUserProfile: 'user'
+    updateUserProfile: 'ProfilePayload'
     updateZoomIntegration: 'zintegration'
     upgradeSubscription: 'user'
     verifyMyAccount: 'user'
@@ -2385,6 +2386,7 @@ export interface NexusGenAbstractTypeMembers {
   JobPostPayload: "ErrorObject" | "jobpost"
   MediaPayload: "ErrorObject" | "media"
   PortfolioPayload: "ErrorObject" | "portfolio"
+  ProfilePayload: "ErrorObject" | "profile"
   ResumePayload: "ErrorObject" | "resume"
   SchedulePayload: "ErrorObject" | "schedule"
   SkillPayload: "ErrorObject" | "skills"

@@ -53,7 +53,8 @@ export const JobPostMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 401,
-            message: "You Company must be verified",
+            message:
+              "Your Company must be verified, submit required documents before job post creation",
           };
         }
 

@@ -111,3 +111,10 @@ export const SocialPayload = unionType({
     t.members("social", "ErrorObject");
   },
 });
+
+export const ProfilePayload = unionType({
+  name: "ProfilePayload",
+  definition(t) {
+    t.members("profile", "ErrorObject");
+  },
+});

@@ -118,7 +118,7 @@ export async function VerificationEmail(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120"  style="max-width: 100%; vertical-align: middle">
                   </a>
                 </td>
@@ -133,7 +133,7 @@ export async function VerificationEmail(
                       by clicking the link below:
                     </p>
                     <div style="padding-top: 16px; padding-bottom: 16px">
-                      <a href="http://localhost:3000/auth/verification?userid=${userid}" style="cursor: pointer; border-radius: 6px; border-width: 0px; background-color: gold; padding: 12px; font-weight: 600; color: #000001; text-decoration: none">Verify Email Address</a>
+                      <a href="https://www.beehireds.com/auth/verification?userid=${userid}" style="cursor: pointer; border-radius: 6px; border-width: 0px; background-color: gold; padding: 12px; font-weight: 600; color: #000001; text-decoration: none">Verify Email Address</a>
                     </div>
                     <p style="color: #000001;">
                       Please disregard this email if you have not created an
@@ -245,7 +245,7 @@ export async function RecruitersInstruction(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle">
                   </a>
                 </td>
@@ -420,7 +420,7 @@ export async function FreelancerVerificationEmail(
               <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                    <a href="http://localhost:3000">
+                    <a href="https://www.beehireds.com/">
                       <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120"  style="max-width: 100%; vertical-align: middle">
                     </a>
                   </td>
@@ -616,7 +616,7 @@ export async function ResetPasswordLink(
                     class="sm-py-8 sm-px-6"
                     style="padding: 48px; text-align: center"
                   >
-                    <a href="http://localhost:3000">
+                    <a href="https://www.beehireds.com/">
                       <img
                         src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png"
                         width="120"
@@ -650,7 +650,7 @@ export async function ResetPasswordLink(
                       </p>
                       <div style="padding-top: 16px; padding-bottom: 16px">
                         <a
-                          href="http://localhost:3000/auth/forgotpassword/resetpassword/${resetLink}?userid=${userid}"
+                          href="https://www.beehireds.com/auth/forgotpassword/resetpassword/${resetLink}?userid=${userid}"
                           style="
                             cursor: pointer;
                             border-radius: 6px;
@@ -796,7 +796,7 @@ export async function ApplicantPending(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -924,7 +924,7 @@ export async function ApplicantReview(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1060,7 +1060,7 @@ export async function ApplicantHired(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1202,7 +1202,7 @@ export async function ApplicantInterview(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1368,7 +1368,7 @@ export async function ApplicantReject(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1510,7 +1510,7 @@ export async function ChangeEmailAddress(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1526,7 +1526,7 @@ export async function ChangeEmailAddress(
                       by clicking the link below:
                     </p>
                     <div style="padding-top: 16px; padding-bottom: 16px">
-                      <a href="http://localhost:3000/auth/verification?userid=${userid}" style="
+                      <a href="https://www.beehireds.com/auth/verification?userid=${userid}" style="
                         cursor: pointer;
                         border-radius: 6px;
                         border-width: 0px;
@@ -1643,7 +1643,7 @@ export async function AccountDeactivation(email: string, fullname: string) {
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>
@@ -1771,7 +1771,7 @@ export async function JobApplicationClose(
             <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
               <tr>
                 <td class="sm-py-8 sm-px-6" style="padding: 48px; text-align: center">
-                  <a href="http://localhost:3000">
+                  <a href="https://www.beehireds.com/">
                     <img src="http://cdn.mcauto-images-production.sendgrid.net/c19fbca0252c8257/aa48b7bb-ae11-47bc-b675-9622627de953/500x500.png" width="120" style="max-width: 100%; vertical-align: middle" alt="">
                   </a>
                 </td>

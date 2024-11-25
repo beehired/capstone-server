@@ -232,7 +232,7 @@ type Mutation {
   updateSocialLink(Github: String, Web: String, X: String, facebook: String, instagram: String, socialID: ID!): social
   updateTheme(file: Upload, theme: String!, themeID: ID!): theme
   updateUserPasswordAccount(password: String!, userID: ID!): UserPayload
-  updateUserProfile(input: ProfileInput, userID: ID!): user
+  updateUserProfile(input: ProfileInput, userID: ID!): ProfilePayload
   updateZoomIntegration(accountID: String!, clientID: String!, integrationID: ID!, secretID: String!): zintegration
   upgradeSubscription(subscriptionId: String!, userID: ID!): user
   verifyMyAccount(userID: ID!): user
@@ -279,6 +279,8 @@ input ProfileInput {
   lastname: String
   phone: String
 }
+
+union ProfilePayload = ErrorObject | profile
 
 type ProjectOrganizerPagination {
   currentPage: Int
@@ -432,7 +434,7 @@ input UserInput {
   firstname: String
   lastname: String
   password: String
-  phone: PhoneNumber
+  phone: String
 }
 
 type UserPagination {

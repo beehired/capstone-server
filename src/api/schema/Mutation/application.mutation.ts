@@ -243,7 +243,7 @@ export const ApplicationMutation = extendType({
 
           await prisma.notification.create({
             data: {
-              title: `Congratulation, You are hired at ${applicant.JobPost.title}`,
+              title: `“Congratulations! You are hired for ${applicant.JobPost.title} at ${applicant.JobPost.Company.companyName}`,
               User: {
                 connect: {
                   userID: applicant.userID,

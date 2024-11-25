@@ -44,7 +44,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 409,
-            message: "Email Address is already exists",
+            message: "Email Address already exist",
           };
         }
 
@@ -109,7 +109,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 409,
-            message: "Email Address is already exists",
+            message: "Email Address already exist",
           };
         }
 
@@ -209,7 +209,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already exists",
+            message: "Email Address already exist",
           };
         }
 
@@ -448,7 +448,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already exists",
+            message: "Email Address already exist",
           };
         }
 
@@ -456,7 +456,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already exists",
+            message: "Email Address already exist",
           };
         }
 
@@ -491,23 +491,41 @@ export const UserMutation = extendType({
       },
     });
     t.field("updateUserProfile", {
-      type: "user",
+      type: "ProfilePayload",
       args: { userID: nonNull(idArg()), input: "ProfileInput" },
       resolve: async (_, { userID, input: { firstname, lastname, phone } }) => {
-        return await prisma.user.update({
+        const phoneRegEx = /^\+(\d{1,4})(\d{7,10})$/;
+
+        function extractPhoneNubmer(phone) {
+          const match = phone.match(phoneRegEx);
+
+          if (match) {
+            return match[1];
+          }
+        }
+
+        if (!phone.match(phoneRegEx)) {
+          return {
+            __typename: "ErrorObject",
+            code: 400,
+            message: "Invalid Phone Number",
+          };
+        }
+        const profile = await prisma.profile.update({
           where: {
             userID,
           },
           data: {
-            Profile: {
-              update: {
-                firstname,
-                lastname,
-                phone,
-              },
-            },
+            firstname,
+            lastname,
+            phone: extractPhoneNubmer(phone),
           },
         });
+
+        return {
+          __typename: "profile",
+          ...profile,
+        };
       },
     });
     t.field("login", {
