@@ -184,7 +184,7 @@ export const ScheduleMutation = extendType({
         });
         await prisma.notification.create({
           data: {
-            title: "Reschedule Interview Schedule",
+            title: "Rescheduled Interview Schedule",
             User: {
               connect: {
                 userID: user.receiverID,
@@ -205,7 +205,7 @@ export const ScheduleMutation = extendType({
 
         await prisma.activityLogs.create({
           data: {
-            title: "Update Calendar Schedule",
+            title: "Updated Calendar Schedule",
             description: "You have updated a calendar schedule for interview",
             User: {
               connect: {
@@ -229,6 +229,21 @@ export const ScheduleMutation = extendType({
       type: "schedule",
       args: { scheduleID: nonNull(idArg()) },
       resolve: async (_, { scheduleID }): Promise<any> => {
+        const schedule = await prisma.schedule.findFirst({
+          where: { scheduleID },
+        });
+
+        await prisma.notification.create({
+          data: {
+            title: "Interview Schedule is Successfully Deleted",
+            User: {
+              connect: {
+                userID: schedule.receiverID,
+              },
+            },
+          },
+        });
+
         return await prisma.schedule.delete({
           where: { scheduleID },
         });

@@ -12,6 +12,9 @@ export const ProfileQuery = extendType({
           where: {
             userID,
           },
+          cacheStrategy: {
+            ttl: 60,
+          },
         });
       },
     });
@@ -22,6 +25,9 @@ export const ProfileQuery = extendType({
         return await prisma.profile.findFirst({
           where: {
             profileID,
+          },
+          cacheStrategy: {
+            ttl: 60,
           },
         });
       },
