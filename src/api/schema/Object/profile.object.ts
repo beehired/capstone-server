@@ -7,7 +7,7 @@ export const ProfileObject = objectType({
     t.id("profileID");
     t.string("firstname");
     t.string("lastname");
-    t.phone("phone");
+    t.string("phone");
     t.date("birthday");
     t.datetime("createdAt");
     t.datetime("updatedAt");
