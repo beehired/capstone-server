@@ -303,7 +303,7 @@ type Query {
   getAllMySaveJobs(userID: ID!): [favourite]
   getAllMySocialLink(profileID: ID!): social
   getAllResumyByProfileID(profileID: ID!): [resume]
-  getAllUserAccountByRole(input: PaginationInput, role: String, search: String): UserPagination
+  getAllUserAccountByRole(input: PaginationInput, role: String, search: String, verified: Boolean): UserPagination
   getApplicantJobPostByIdPagination(input: PaginationInput!, jobPostID: ID!, search: String): ApplicantPagination
   getApplicationByID(applicationID: ID!): application
   getCompanyByID(companyID: ID!): company
@@ -641,7 +641,7 @@ type profile {
   getMyTheme: theme
   header: media
   lastname: String
-  phone: PhoneNumber
+  phone: String
   portfolio: [portfolio]
   profileID: ID
   review: [review]

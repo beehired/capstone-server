@@ -1,4 +1,11 @@
-import { extendType, idArg, inputObjectType, nonNull, stringArg } from "nexus";
+import {
+  booleanArg,
+  extendType,
+  idArg,
+  inputObjectType,
+  nonNull,
+  stringArg,
+} from "nexus";
 import { prisma } from "../../helpers/server";
 
 export const PaginationInput = inputObjectType({
@@ -18,10 +25,11 @@ export const UserQuery = extendType({
         input: "PaginationInput",
         role: stringArg(),
         search: stringArg(),
+        verified: booleanArg(),
       },
       resolve: async (
         _,
-        { input: { take, page }, role, search }
+        { input: { take, page }, role, search, verified }
       ): Promise<any> => {
         const result = await prisma.user.findMany({
           where: {
@@ -43,6 +51,7 @@ export const UserQuery = extendType({
                 },
               ],
             },
+            verified,
           },
         });
 

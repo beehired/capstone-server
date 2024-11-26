@@ -451,7 +451,7 @@ export interface NexusGenObjects {
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstname?: string | null; // String
     lastname?: string | null; // String
-    phone?: NexusGenScalars['PhoneNumber'] | null; // PhoneNumber
+    phone?: string | null; // String
     profileID?: string | null; // ID
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -1060,7 +1060,7 @@ export interface NexusGenFieldTypes {
     getMyTheme: NexusGenRootTypes['theme'] | null; // theme
     header: NexusGenRootTypes['media'] | null; // media
     lastname: string | null; // String
-    phone: NexusGenScalars['PhoneNumber'] | null; // PhoneNumber
+    phone: string | null; // String
     portfolio: Array<NexusGenRootTypes['portfolio'] | null> | null; // [portfolio]
     profileID: string | null; // ID
     review: Array<NexusGenRootTypes['review'] | null> | null; // [review]
@@ -1671,7 +1671,7 @@ export interface NexusGenFieldTypeNames {
     getMyTheme: 'theme'
     header: 'media'
     lastname: 'String'
-    phone: 'PhoneNumber'
+    phone: 'String'
     portfolio: 'portfolio'
     profileID: 'ID'
     review: 'review'
@@ -2233,6 +2233,7 @@ export interface NexusGenArgTypes {
       input?: NexusGenInputs['PaginationInput'] | null; // PaginationInput
       role?: string | null; // String
       search?: string | null; // String
+      verified?: boolean | null; // Boolean
     }
     getApplicantJobPostByIdPagination: { // args
       input: NexusGenInputs['PaginationInput']; // PaginationInput!
