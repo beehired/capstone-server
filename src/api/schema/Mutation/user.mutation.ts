@@ -494,21 +494,11 @@ export const UserMutation = extendType({
       type: "ProfilePayload",
       args: { userID: nonNull(idArg()), input: "ProfileInput" },
       resolve: async (_, { userID, input: { firstname, lastname, phone } }) => {
-        const phoneRegEx = /^\+(\d{1,4})(\d{7,10})$/;
-
-        function extractPhoneNubmer(phone) {
-          const match = phone.match(phoneRegEx);
-
-          if (match) {
-            return match[1];
-          }
-        }
-
-        if (!phone.match(phoneRegEx)) {
+        if (!phone) {
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Invalid Phone Number",
+            message: "Phone Number is required",
           };
         }
         const profile = await prisma.profile.update({
@@ -518,7 +508,7 @@ export const UserMutation = extendType({
           data: {
             firstname,
             lastname,
-            phone: extractPhoneNubmer(phone),
+            phone,
           },
         });
 
