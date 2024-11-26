@@ -32,7 +32,7 @@ export const SkillsMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Skills is already exist.",
+            message: "Skill already exist.",
           };
         }
 
