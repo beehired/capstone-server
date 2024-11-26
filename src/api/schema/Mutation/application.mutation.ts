@@ -206,7 +206,7 @@ export const ApplicationMutation = extendType({
 
           await prisma.notification.create({
             data: {
-              title: `Your Application is on the Under Review`,
+              title: `Your application is under review`,
               User: {
                 connect: {
                   userID: applicant.userID,
