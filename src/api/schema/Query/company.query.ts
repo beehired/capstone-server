@@ -1,4 +1,11 @@
-import { extendInputType, extendType, idArg, nonNull, stringArg } from "nexus";
+import {
+  booleanArg,
+  extendInputType,
+  extendType,
+  idArg,
+  nonNull,
+  stringArg,
+} from "nexus";
 import { prisma } from "../../helpers/server";
 
 export const CompanyQuery = extendType({
@@ -6,8 +13,15 @@ export const CompanyQuery = extendType({
   definition(t) {
     t.field("getAllCompanies", {
       type: "CompaniesPagination",
-      args: { input: nonNull("PaginationInput"), search: stringArg() },
-      resolve: async (_, { input: { page, take }, search }): Promise<any> => {
+      args: {
+        input: nonNull("PaginationInput"),
+        search: stringArg(),
+        verified: booleanArg(),
+      },
+      resolve: async (
+        _,
+        { input: { page, take }, search, verified }
+      ): Promise<any> => {
         const result = await prisma.company.findMany({
           take,
           skip: take * (page - 1),
@@ -16,6 +30,7 @@ export const CompanyQuery = extendType({
               contains: search,
               mode: "insensitive",
             },
+            verified,
           },
         });
 
