@@ -294,7 +294,7 @@ type ProjectOrganizerPagination {
 type Query {
   getAboutById(aboutID: ID!): about
   getAboutByProfileID(profileID: ID!): about
-  getAllCompanies(input: PaginationInput!, search: String): CompaniesPagination
+  getAllCompanies(input: PaginationInput!, search: String, verified: Boolean): CompaniesPagination
   getAllCompanyReview(companyID: ID!, input: PaginationInput!): ReviewPagination
   getAllEducationByProfileId(profileID: ID!): [education]
   getAllFonts(pagination: PaginationInput!, search: String): FontPagination

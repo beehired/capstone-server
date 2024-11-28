@@ -48,20 +48,12 @@ export const MessageQuery = extendType({
           where: {
             OR: [{ senderID: userID }, { receiverID: userID }],
             sender: {
-              OR: [
-                {
-                  Profile: {
-                    firstname: {
-                      contains: search,
-                      mode: "insensitive",
-                    },
-                    lastname: {
-                      contains: search,
-                      mode: "insensitive",
-                    },
-                  },
+              Company: {
+                companyName: {
+                  contains: search,
+                  mode: "insensitive",
                 },
-              ],
+              },
             },
             receiver: {
               OR: [

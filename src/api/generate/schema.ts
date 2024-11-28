@@ -2202,6 +2202,7 @@ export interface NexusGenArgTypes {
     getAllCompanies: { // args
       input: NexusGenInputs['PaginationInput']; // PaginationInput!
       search?: string | null; // String
+      verified?: boolean | null; // Boolean
     }
     getAllCompanyReview: { // args
       companyID: string; // ID!

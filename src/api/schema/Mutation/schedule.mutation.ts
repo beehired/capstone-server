@@ -184,7 +184,7 @@ export const ScheduleMutation = extendType({
         });
         await prisma.notification.create({
           data: {
-            title: "Rescheduled Interview Schedule",
+            title: "Rescheduled interview schedule",
             User: {
               connect: {
                 userID: user.receiverID,
@@ -235,7 +235,7 @@ export const ScheduleMutation = extendType({
 
         await prisma.notification.create({
           data: {
-            title: "Interview Schedule is Successfully Deleted",
+            title: "Scheduled interview was deleted",
             User: {
               connect: {
                 userID: schedule.receiverID,
