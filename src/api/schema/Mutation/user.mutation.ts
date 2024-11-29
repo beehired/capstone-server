@@ -612,7 +612,7 @@ export const UserMutation = extendType({
           return {
             __typename: "ErrorObject",
             code: 400,
-            message: "Email Address is already exist",
+            message: "Email Address already exist",
           };
         }
 
