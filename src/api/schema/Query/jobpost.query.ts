@@ -34,6 +34,9 @@ export const JobPostQuery = extendType({
               ],
             },
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         });
       },
     });
