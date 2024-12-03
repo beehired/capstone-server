@@ -63,6 +63,9 @@ export const JobPostQuery = extendType({
               userID,
             },
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         });
 
         const offset = (page - 1) * take;

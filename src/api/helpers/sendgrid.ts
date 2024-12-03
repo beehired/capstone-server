@@ -434,11 +434,11 @@ export async function FreelancerVerificationEmail(
                       ">
                       <p style="color: #000">Hello ${fullname},</p>
                       <p style="color: #000">
-                        Thank you for submitting your identification documents
+                        Thank you for submitting your identification document
                         for verification.
                       </p>
                       <p style="color: #000">
-                        We have received your documents and are currently
+                        We have received your document and are currently
                         processing them to complete your registration on
                         BeeHired. Please be aware that this verification process
                         may take up to 3-5 business days.
