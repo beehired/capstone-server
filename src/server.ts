@@ -75,7 +75,6 @@ import { graphqlUploadExpress } from "graphql-upload-ts";
     schema,
     cache: new InMemoryLRUCache(),
     csrfPrevention: true,
-    introspection: true,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
 
