@@ -86,26 +86,18 @@ export const MessageQuery = extendType({
         const messages = await prisma.message.findMany({
           where: {
             OR: [{ senderID: userID }, { receiverID: userID }],
-            AND: search
-              ? {
-                  receiver: {
-                    OR: [
-                      {
-                        Profile: {
-                          firstname: {
-                            contains: search,
-                            mode: "insensitive",
-                          },
-                          lastname: {
-                            contains: search,
-                            mode: "insensitive",
-                          },
-                        },
-                      },
-                    ],
+            receiver: {
+              Profile: {
+                OR: [
+                  {
+                    firstname: { contains: search, mode: "insensitive" },
                   },
-                }
-              : undefined,
+                  {
+                    lastname: { contains: search, mode: "insensitive" },
+                  },
+                ],
+              },
+            },
           },
           orderBy: {
             createdAt: "desc",
