@@ -40,7 +40,7 @@ export const MessageQuery = extendType({
         return hello.length;
       },
     });
-    t.list.field("getMessages", {
+    t.list.field("getFreelancerMessages", {
       type: "GroupMessage",
       args: { userID: nonNull(idArg()), search: stringArg() },
       resolve: async (_, { userID, search }): Promise<any> => {
@@ -54,6 +54,53 @@ export const MessageQuery = extendType({
                   mode: "insensitive",
                 },
               },
+            },
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+          include: {
+            receiver: true,
+            sender: true,
+            Media: true,
+          },
+          distinct: ["receiverID", "senderID"],
+        });
+
+        const groupedMessages = groupBy(messages, (message) => {
+          return message.senderID === userID
+            ? message.receiverID
+            : message.senderID;
+        });
+
+        return Object.entries(groupedMessages).map(([userID, messages]) => ({
+          userID,
+          message: messages[0],
+        }));
+      },
+    });
+    t.list.field("getMessages", {
+      type: "GroupMessage",
+      args: { userID: nonNull(idArg()), search: stringArg() },
+      resolve: async (_, { userID, search }): Promise<any> => {
+        const messages = await prisma.message.findMany({
+          where: {
+            OR: [{ senderID: userID }, { receiverID: userID }],
+            sender: {
+              OR: [
+                {
+                  Profile: {
+                    firstname: {
+                      contains: search,
+                      mode: "insensitive",
+                    },
+                    lastname: {
+                      contains: search,
+                      mode: "insensitive",
+                    },
+                  },
+                },
+              ],
             },
             receiver: {
               OR: [
