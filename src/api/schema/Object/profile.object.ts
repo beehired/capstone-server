@@ -103,6 +103,8 @@ export const ProfileObject = objectType({
         return await prisma.theme.findFirst({
           where: {
             Profile: { some: { profileID } },
+          },
+          orderBy: {
             createdAt: "desc",
           },
         });
