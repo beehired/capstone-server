@@ -151,7 +151,8 @@ model Profile {
   Resume     Resume[]
   Social     Social?
   Skills     Skills[]    @relation("ProfileToSkills")
-  theme      Theme[]     @relation("ProfileToTheme")
+  theme      Theme?      @relation(fields: [themeID], references: [themeID])
+  themeID    String?
 }
 
 model Social {
@@ -243,7 +244,7 @@ model Theme {
   updatedAt DateTime  @default(now()) @updatedAt @db.Timestamp(6)
   userID    String?
   User      User?     @relation(fields: [userID], references: [userID])
-  Profile   Profile[] @relation("ProfileToTheme")
+  Profile   Profile[]
 }
 
 model Font {

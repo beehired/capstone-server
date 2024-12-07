@@ -101,12 +101,7 @@ export const ProfileObject = objectType({
       type: "theme",
       resolve: async ({ profileID }) => {
         return await prisma.theme.findFirst({
-          where: {
-            Profile: { some: { profileID } },
-          },
-          orderBy: {
-            createdAt: "desc",
-          },
+          where: { Profile: { some: { profileID } } },
         });
       },
     });
